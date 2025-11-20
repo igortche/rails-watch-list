@@ -1,0 +1,25 @@
+<h1 class="mb-4">Top films</h1>
+
+<div class="movie-list d-flex flex-wrap gap-4">
+  <% @movies.each do |movie| %>
+    <div class="movie-card">
+      <div class="poster-wrap">
+        <% if movie.poster_url.present? %>
+          <%= image_tag movie.poster_url, alt: movie.title, class: 'poster' %>
+        <% else %>
+          <div class="poster placeholder">No image</div>
+        <% end %>
+
+        <div class="rating-badge">
+          ⭐ <span class="rating-value"><%= movie.rating %></span>
+        </div>
+      </div>
+
+      <div class="movie-info mt-2">
+        <h2><%= movie.title %></h2>
+      </div>
+
+      <p class="mt-2 text-muted"><%= truncate(movie.overview, length: 140) %></p>
+    </div>
+  <% end %>
+</div>

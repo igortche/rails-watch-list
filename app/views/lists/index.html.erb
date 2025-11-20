@@ -1,0 +1,10 @@
+<div class="list-group">
+    <% @lists.each do |list| %>
+      <div class="list-group-item d-flex justify-content-between align-items-center">
+        <span class="fw-medium"><%= link_to list.name, list_path(list) %></span>
+        <small class="text-muted"><%= pluralize(list.bookmarks.count, 'bookmark') %></small>
+      </div>
+    <% end %>
+  </div>
+
+<%= link_to "Créer une liste", new_list_path, class: "btn btn-primary" %>

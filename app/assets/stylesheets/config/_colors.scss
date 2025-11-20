@@ -1,0 +1,22 @@
+// Minimal pale color palette for a clean, mostly-white UI
+
+// Neutrals
+$white:      #FFFFFF;
+$off-white:  #FBFCFD; // very pale background
+$muted:      #6B7280; // soft text
+$text-dark:  #111827; // for headings
+
+// Pale accents
+$pale-blue:  #E6F0FF;
+$pale-green: #EBFAF0;
+$pale-yellow:#FFF9EA;
+
+// Utility/grays
+$light-gray: #F6F7F8;
+$mid-gray:   #E9ECEF;
+
+// Bootstrap color tokens (can be overridden)
+$blue:       $pale-blue;
+$green:      $pale-green;
+$yellow:     $pale-yellow;
+$gray:       $text-dark;

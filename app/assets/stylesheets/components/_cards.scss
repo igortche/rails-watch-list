@@ -1,0 +1,58 @@
+.movie-card {
+  border: 1px solid $mid-gray;
+  border-radius: 12px;
+  padding: 12px;
+  box-shadow: 0 1px 4px rgba(16, 24, 40, 0.04);
+  width: 220px;
+  background: $white;
+
+  .poster-wrap {
+    position: relative;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  .poster {
+    display: block;
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+  }
+
+  .poster.placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: $light-gray;
+    color: $muted;
+    height: 330px;
+  }
+
+  .rating-badge {
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    background: rgba(255, 255, 255, 0.88);
+    color: $text-dark;
+    padding: 4px 8px;
+    border-radius: 999px;
+    font-weight: 700;
+    font-size: 0.875rem;
+    box-shadow: 0 2px 6px rgba(16,24,40,0.06);
+    display: inline-flex;
+    gap: 6px;
+    align-items: center;
+  }
+
+}
+
+.movie-info {
+  h2 {
+    font-size: 1rem;
+    color: $headings-color;
+    margin: 0;
+    padding: 0;
+    line-height: 1.2;
+  }
+
+}
