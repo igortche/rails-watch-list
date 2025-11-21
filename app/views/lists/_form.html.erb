@@ -1,0 +1,10 @@
+<%= simple_form_for(@list) do |f| %>
+  <div class="mb-3">
+    <%= f.input :name, input_html: { class: 'form-control' }, label: 'Nom de la liste' %>
+  </div>
+
+  <div class="d-flex gap-2">
+    <%= f.button :submit, class: 'btn btn-primary' %>
+    <%= link_to 'Annuler', lists_path, class: 'btn btn-outline-secondary' %>
+  </div>
+<% end %>

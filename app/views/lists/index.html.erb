@@ -1,10 +1,57 @@
-<div class="list-group">
-    <% @lists.each do |list| %>
-      <div class="list-group-item d-flex justify-content-between align-items-center">
-        <span class="fw-medium"><%= link_to list.name, list_path(list) %></span>
-        <small class="text-muted"><%= pluralize(list.bookmarks.count, 'bookmark') %></small>
-      </div>
-    <% end %>
-  </div>
+<div class="d-flex align-items-center justify-content-between mb-4 p-3">
+  <h1 class="h3 mb-0 text-dark">Mes listes de films</h1>
+  <%= link_to "Créer une liste", new_list_path, class: "btn btn-primary" %>
+</div>
 
-<%= link_to "Créer une liste", new_list_path, class: "btn btn-primary" %>
+<div class="row g-4 p-3">
+  <% @lists.each do |list| %>
+    <!-- 2 cartes par ligne à partir de md -->
+    <div class="col-12 col-md-6">
+      <div class="list-card d-flex align-items-start gap-3 p-3">
+
+        <div class="avatar-wrap">
+          <% initials = list.name.split.map { |w| w[0] }.join.upcase[0,2] %>
+          <div class="list-avatar"><%= initials %></div>
+        </div>
+
+        <!-- INFO + vignettes empilées -->
+        <div class="list-body flex-grow-1">
+          <div class="list-info">
+            <h2 class="mb-1">
+              <%= link_to list.name, list_path(list), class: "text-dark" %>
+            </h2>
+          </div>
+
+          <p class="mt-1 text-muted small mb-2">
+            <%= pluralize(list.movies.count, "film") %> •
+            <%= pluralize(list.bookmarks.count, "bookmark") %>
+          </p>
+
+          <!-- VIGNETTES SOUS LES INFOS -->
+          <div class="list-thumbs-below">
+            <div class="thumbs d-flex flex-wrap">
+              <% list.movies.limit(4).each do |movie| %>
+                <% if movie.poster_url.present? %>
+                  <%= image_tag movie.poster_url,
+                                alt: movie.title,
+                                class: "list-thumb me-2 mb-2" %>
+                <% else %>
+                  <div class="list-thumb placeholder me-2 mb-2 d-flex align-items-center justify-content-center">
+                    No image
+                  </div>
+                <% end %>
+              <% end %>
+
+              <% if list.movies.count > 4 %>
+                <div class="more-count d-flex align-items-center justify-content-center">
+                  +<%= list.movies.count - 4 %>
+                </div>
+              <% end %>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>

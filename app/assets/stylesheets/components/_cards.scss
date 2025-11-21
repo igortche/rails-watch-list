@@ -1,5 +1,4 @@
-
-
+/* Movie card visuals */
 .movie-card {
   border: 1px solid $mid-gray;
   border-radius: 12px;
@@ -14,14 +13,13 @@
   transition: transform 220ms cubic-bezier(.22,.61,.36,1),
               box-shadow 220ms cubic-bezier(.22,.61,.36,1);
 
-  // état normal
+  // état normal (léger shadow pour base)
   transform: translate3d(0, 0, 0) rotateX(0) rotateY(0) scale(1, 1);
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.18);
+  box-shadow: 0 1px 4px rgba(16, 24, 40, 0.04);
 
   &:hover {
     animation: float-tilt-grow 2.2s cubic-bezier(.37,0,.63,1) infinite;
   }
-
 
   .poster-wrap {
     position: relative;
@@ -63,6 +61,18 @@
 
 }
 
+/* Shared animated shadow behaviour for movie cards */
+.movie-card {
+  transition: transform 220ms cubic-bezier(.22,.61,.36,1),
+              box-shadow 220ms cubic-bezier(.22,.61,.36,1);
+
+  &:hover {
+    /* stronger shadow on hover to give elevation */
+    box-shadow: 0 22px 40px rgba(0, 0, 0, 0.10);
+    z-index: 10;
+  }
+}
+
 .movie-info {
   h2 {
     font-size: 1rem;
@@ -74,6 +84,176 @@
 
 }
 
+/* list-card: same visual treatment and animations as movie-card */
+.list-card {
+  /* horizontal card: left thumbnails, right info */
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border: 1px solid $mid-gray;
+  border-radius: 12px;
+  padding: 12px;
+  box-shadow: 0 1px 4px rgba(16, 24, 40, 0.04);
+  width: 100%;
+  background: $white;
+
+  position: relative;
+  transform-style: preserve-3d;
+  will-change: transform, box-shadow;
+  transition: transform 220ms cubic-bezier(.22,.61,.36,1),
+              box-shadow 220ms cubic-bezier(.22,.61,.36,1);
+
+  // état normal (léger shadow pour base)
+  transform: translate3d(0, 0, 0) rotateX(0) rotateY(0) scale(1, 1);
+  box-shadow: 0 1px 4px rgba(16, 24, 40, 0.04);
+
+  &:hover {
+    animation: float-tilt-grow 2.2s cubic-bezier(.37,0,.63,1) infinite;
+  }
+
+  .thumbs-wrap {
+    width: 140px;
+    flex-shrink: 0;
+    position: relative;
+  }
+
+  .avatar-wrap {
+    flex-shrink: 0;
+  }
+
+  .list-avatar {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background: linear-gradient(180deg, rgba(230,240,255,1), rgba(245,248,255,1));
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: $headings-color;
+    font-weight: 700;
+    font-size: 1.125rem;
+    box-shadow: 0 2px 6px rgba(16,24,40,0.06);
+  }
+
+  .thumbs {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+  }
+
+  .list-thumb {
+    width: 48px;
+    height: 72px;
+    object-fit: cover;
+    border-radius: 6px;
+    display: inline-block;
+  }
+
+  .list-thumb.placeholder {
+    background: $light-gray;
+    color: $muted;
+    font-size: 0.75rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .more-count {
+    width: 44px;
+    height: 66px;
+    border-radius: 6px;
+    background: rgba(0,0,0,0.04);
+    color: $muted;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+  }
+
+  .rating-badge {
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    background: rgba(255, 255, 255, 0.88);
+    color: $text-dark;
+    padding: 4px 8px;
+    border-radius: 999px;
+    font-weight: 700;
+    font-size: 0.875rem;
+    box-shadow: 0 2px 6px rgba(16,24,40,0.06);
+    display: inline-flex;
+    gap: 6px;
+    align-items: center;
+  }
+
+  .list-body {
+    min-width: 0; /* allow truncation */
+    flex: 1 1 auto;
+    overflow: hidden;
+  }
+
+  .list-info h2 a {
+    display: inline-block;
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  @media (max-width: 576px) {
+    flex-direction: column;
+    align-items: flex-start;
+
+    .thumbs-wrap {
+      width: 100%;
+    }
+  }
+
+}
+
+/* Thumbnails shown below the list-card */
+.list-thumbs-below {
+  margin-top: 8px;
+
+  .thumbs {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+  }
+
+  .list-thumb {
+    width: 56px;
+    height: 84px;
+    object-fit: cover;
+    border-radius: 6px;
+    display: inline-block;
+  }
+
+  .more-count {
+    width: 56px;
+    height: 84px;
+    border-radius: 6px;
+    background: rgba(0,0,0,0.04);
+    color: $muted;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+  }
+}
+
+.list-info {
+  h2 {
+    font-size: 1rem;
+    color: $headings-color;
+    margin: 0;
+    padding: 0;
+    line-height: 1.2;
+  }
+}
+
+
+/* .list-card styles removed per request (use default Bootstrap/grid styles) */
 
 @keyframes float-tilt-grow {
   0% {
@@ -99,8 +279,8 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .card-film:hover {
-    animation: none;
+  .movie-card:hover {
+    animation: none !important;
     transform: translate3d(0, -3px, 0) scale(1.01, 1.01);
     box-shadow: 0 12px 22px rgba(0,0,0,0.14);
   }
